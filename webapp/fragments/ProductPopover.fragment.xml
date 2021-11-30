@@ -1,0 +1,33 @@
+<core:FragmentDefinition xmlns:form="sap.ui.layout.form"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Popover
+		id="myPopover"
+		class="sapUiResponsivePadding--header sapUiResponsivePadding--footer"
+		placement="Bottom">
+		<form:SimpleForm >
+            <form:content>
+                <Label text="Product ID"></Label>
+                <Text text="{ProductID}"></Text>
+                <Label text="Product Name"></Label>
+                <Text text="{ProductName}"></Text>
+                <Label text="Supplier Id"></Label>
+                <Text text="{SupplierID}"></Text>
+                <Label text="Category ID"></Label>
+                <Text text="{CategoryID}"></Text>
+                <Label text="Quantity Per Unit"></Label>
+                <Text text="{QuantityPerUnit}"></Text>
+                <Label text="Unit Price"></Label>
+                <Text text="{UnitPrice}"></Text>
+                <Label text="Units In Stock"></Label>
+                <Text text="{UnitsInStock}"></Text>
+                <Label text="Units On Order"></Label>
+                <Text text="{UnitsOnOrder}"></Text>
+                <Label text="Reorder Level"></Label>
+                <Text text="{ReorderLevel}"></Text>
+                <Label text="Discontinued"></Label>
+                <Text text="{Discontinued}"></Text>
+            </form:content>
+        </form:SimpleForm>
+	</Popover>
+</core:FragmentDefinition>

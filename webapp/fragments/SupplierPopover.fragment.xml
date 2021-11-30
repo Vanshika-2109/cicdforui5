@@ -1,0 +1,71 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<TableSelectDialog noDataText="No Suppliers Found" title="Select Supplier" search="handleSearch" confirm="handleClose" cancel="handleClose"
+		items="{/Suppliers}">
+		<ColumnListItem>
+			<cells>
+				<ObjectIdentifier title="{CompanyName}" text="{SupplierID}"/>
+				<Text text="{ContactName}"/>
+				<Text text="{ContactTitle}"/>
+				<Text text="{Address}"/>
+				<Text text="{City}"/>
+				<Text text="{Region}"/>
+				<Text text="{Country}"/>
+				<Text text="{PostalCode}"/>
+				<Text text="{Phone}"/>
+				<Text text="{Fax}"/>
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="Supplier"/>
+				</header>
+			</Column>
+			<Column >
+				<header>
+					<Text text="Contact Name"/>
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Contact Title"/>
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Address"/>
+				</header>
+			</Column>
+			<Column >
+				<header>
+					<Text text="City"/>
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="Region"/>
+				</header>
+			</Column>
+			<Column >
+				<header>
+					<Text text="Country"/>
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Text text="PostalCode"/>
+				</header>
+			</Column>
+			<Column >
+				<header>
+					<Text text="Phone"/>
+				</header>
+			</Column>
+			<Column >
+				<header>
+					<Text text="Fax"/>
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,346 @@
+<mvc:View xmlns:uxap="sap.uxap" xmlns:layout="sap.ui.layout"
+    controllerName="com.yash.assignment8.controller.App"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+>
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}" >
+					<content>
+                        <NavContainer
+                            id="navCon"
+                            width="98%"
+                            height="80%"
+                            class="navContainerControl sapUiSmallMarginBottom" >
+                            <Page
+                                id="p1"
+                                title="Employee" >
+                                <layout:Splitter id="mainSplitter" height="500px" width="100%">
+                                    <uxap:ObjectPageLayout >
+                                         <uxap:headerTitle>
+                                            <uxap:ObjectPageDynamicHeaderTitle >
+                                                <uxap:expandedHeading>
+                                                    <Title text="Employee"></Title>
+                                                </uxap:expandedHeading>
+                                            </uxap:ObjectPageDynamicHeaderTitle>
+                                        </uxap:headerTitle>
+                                        <uxap:headerContent>
+                                        <HBox >
+                                            <SearchField id="searchEmployee" search="onEmployeeSearch" width="80%" class="sapUiSmallMargin"></SearchField>
+                                            <Button icon="sap-icon://sort" press="onSort" class="sapUiSmallMargin"></Button>
+                                        </HBox>
+                                        </uxap:headerContent>
+                                        <uxap:ObjectPageSection id="totalEmployee" title="totalEmployee">
+                                            <uxap:subSections>
+                                                <uxap:ObjectPageSubSection >
+                                                    <List id="employeelist" items="{/Employees}" updateFinished="onUpdateEmployee">
+                                                        <items>
+                                                            <ObjectListItem title="{FirstName} {LastName}" type="Active" press="onEmployeePressed">
+                                                                <attributes>
+                                                                    <ObjectAttribute text="{Title}"></ObjectAttribute>
+                                                                </attributes>
+                                                            </ObjectListItem>
+                                                        </items>
+                                                    </List>
+                                                </uxap:ObjectPageSubSection>
+                                            </uxap:subSections>
+                                        </uxap:ObjectPageSection>
+                                    </uxap:ObjectPageLayout>
+                                    <uxap:ObjectPageLayout >
+                                        <uxap:headerTitle>
+                                            <uxap:ObjectPageDynamicHeaderTitle >
+                                                <uxap:expandedHeading>
+                                                    <Title text="Orders"></Title>
+                                                </uxap:expandedHeading>
+                                            </uxap:ObjectPageDynamicHeaderTitle>
+                                        </uxap:headerTitle>
+                                        <uxap:headerContent>
+                                        <HBox >
+                                            <SearchField id="search" search="onOrdersSearch" width="80%" class="sapUiSmallMargin"></SearchField>
+                                            <Button icon="sap-icon://sort" press="onSort" class="sapUiSmallMargin"></Button>
+                                        </HBox>
+                                        </uxap:headerContent>
+                                        <uxap:ObjectPageSection id="totalOrders" title="">
+                                            <uxap:subSections>
+                                                <uxap:ObjectPageSubSection >
+                                                    <List id="ordersList" items="{Orders}" updateFinished="onOrderUpdated">
+                                                        <items>
+                                                            <ObjectListItem title="Order ID: {OrderID}" type="Active" press="onOrdersPressed">
+                                                                <attributes>
+                                                                    <ObjectAttribute text="Customer ID: {CustomerID}"></ObjectAttribute>
+                                                                    <ObjectAttribute text="Ship Name: {ShipName}"></ObjectAttribute>
+                                                                </attributes>
+                                                            </ObjectListItem>
+                                                        </items>
+                                                    </List>
+                                                </uxap:ObjectPageSubSection>
+                                            </uxap:subSections>
+                                        </uxap:ObjectPageSection>
+                                    </uxap:ObjectPageLayout>
+                                    <uxap:ObjectPageLayout >
+                                        <uxap:headerTitle>
+                                            <uxap:ObjectPageDynamicHeaderTitle >
+                                                <uxap:expandedHeading>
+                                                    <Title text="Product Details"></Title>
+                                                </uxap:expandedHeading>
+                                            </uxap:ObjectPageDynamicHeaderTitle>
+                                        </uxap:headerTitle>
+                                        <uxap:headerContent>
+                                        <HBox >
+                                            <SearchField id="onOrderDetailSearch" search="onOrderDetailSearch" width="80%" class="sapUiSmallMargin"></SearchField>
+                                            <Button icon="sap-icon://sort" press="onSort" class="sapUiSmallMargin"></Button>
+                                        </HBox>
+                                        </uxap:headerContent>
+                                        <uxap:ObjectPageSection id="totalorderDetail" title="">
+                                            <uxap:subSections>
+                                                <uxap:ObjectPageSubSection >
+                                                    <List id="ordersDetailList" items="{Order_Details}" updateFinished="onOrderDetailUpdate">
+                                                        <items>
+                                                            <ObjectListItem title="Order ID: {OrderID}" type="Active" press="onOrdersPressed"
+                                                            number="Price: {UnitPrice}" numberUnit="EUR">
+                                                                <attributes>
+                                                                    <ObjectAttribute text="Product Id: {ProductID}"></ObjectAttribute>
+                                                                    <ObjectAttribute text="Quantity: {Quantity}"></ObjectAttribute>
+                                                                    <ObjectAttribute text="Discount: {Discount}"></ObjectAttribute>
+                                                                </attributes>
+                                                            </ObjectListItem>
+                                                        </items>
+                                                    </List>
+                                                </uxap:ObjectPageSubSection>
+                                            </uxap:subSections>
+                                        </uxap:ObjectPageSection>
+                                    </uxap:ObjectPageLayout>
+                                </layout:Splitter>
+                            </Page>
+                            <Page
+                                id="p2"
+                                title="Customer" >
+                                <uxap:ObjectPageLayout id="objectPageLayout" showTitleInHeaderContent="true"
+                                    upperCaseAnchorBar="false" >
+                                    <uxap:headerTitle>
+                                        <uxap:ObjectPageDynamicHeaderTitle >
+                                            <uxap:expandedHeading>
+                                                <HBox>
+                                                    <Title text="{CompanyName}" wrapping="true"/>
+                                                    <ObjectMarker type="Favorite" class="sapUiTinyMarginBegin"/>
+                                                </HBox>
+                                            </uxap:expandedHeading>
+                                            <uxap:expandedContent>
+                                                <Text text="{CustomerID}"/>
+                                            </uxap:expandedContent>
+                                        </uxap:ObjectPageDynamicHeaderTitle>
+                                    </uxap:headerTitle>
+                                    <uxap:headerContent>
+                                        <FlexBox wrap="Wrap">
+                                            	<f:Avatar src="./test-resources/sap/uxap/images/imageID_275314.png" class="sapUiTinyMarginEnd"></f:Avatar>
+                                                <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                                                    <Link text="{Phone}"/>
+                                                </layout:VerticalLayout>
+                                        </FlexBox>
+                                    </uxap:headerContent>
+                                    <uxap:ObjectPageSection >
+                                        <uxap:subSections>
+                                            <uxap:ObjectPageSubSection title="TotalCustomer">
+                                                <Table id="CustomerTable" items="{/Customers}" >
+                                                    <columns>
+                                                        <Column >
+                                                            <Text text="Customer ID"></Text>
+                                                        </Column>
+                                                        <Column >
+                                                            <Text text="Company Name"></Text>
+                                                        </Column>
+                                                        <Column >
+                                                            <Text text="Contact Name"></Text>
+                                                        </Column>
+                                                        <Column >
+                                                            <Text text="Contact Title"></Text>
+                                                        </Column>
+                                                        <Column >
+                                                            <Text text="Address"></Text>
+                                                        </Column>
+                                                        <Column >
+                                                            <Text text="City"></Text>
+                                                        </Column>
+                                                    </columns>
+                                                    <items>
+                                                        <ColumnListItem type="Active" press="onCustomerListPress">
+                                                            <cells>
+                                                                <Text text="{CustomerID}"></Text>
+                                                                <Text text="{CompanyName}"></Text>
+                                                                <Text text="{ContactName}"></Text>
+                                                                <Text text="{ContactTitle}"></Text>
+                                                                <Text text="{Address}"></Text>
+                                                                <Text text="{City}"></Text>
+                                                            </cells>
+                                                        </ColumnListItem>
+                                                    </items>
+                                                </Table>
+                                            </uxap:ObjectPageSubSection>
+                                        </uxap:subSections>
+                                    </uxap:ObjectPageSection>
+                                </uxap:ObjectPageLayout>
+                            </Page>
+                            <Page
+                                id="p3"
+                                title="Product" >
+                            <Panel id="panelForGridList">
+                               <headerToolbar>
+                                    <Toolbar height="3rem">
+                                        <Title text="TotalProducts" />
+                                    </Toolbar>
+                                </headerToolbar> 
+                                <f:GridList
+                                    id="gridList"
+                                    items="{/Products}">
+                                    <f:GridListItem press="onProductgridpressed" type="Active">
+                                        <VBox class="sapUiSmallMargin">
+                                            <layoutData>
+                                                <FlexItemData growFactor="1" shrinkFactor="0" /> <!-- Don't shrink below minimum size. Fill space if available. -->
+                                            </layoutData>
+
+                                            <Title text="{ProductName}" wrapping="true" />
+                                            <Label text="{UnitPrice}" wrapping="true" />
+                                        </VBox>
+                                    </f:GridListItem>
+                                </f:GridList>
+                            </Panel>
+                            </Page>
+                            <Page
+                                id="p4"
+                                title="Supplier" >
+                                <HBox >
+                                    <SearchField search="onSearchSupplier" class="sapUiTinyMargin" width="98%"></SearchField>
+                                    <Button text="Open Supplier Dialog" type="Emphasized" press="onSupplierDialogPress" class="sapUiTinyMargin">
+                                    <customData>
+									<core:CustomData key="multi" value="true"/>
+                                    </customData>
+                                    </Button>    
+                                </HBox>
+                                <Table updateFinished="getSupplierCount" growing="true" growingThreshold="5" growingScrollToLoad="false" showSeparators="All"
+							id="productTable" inset="false" items="{ path: 'selectedModel>/Suppliers'}" mode="Delete" delete="deleteSupplier" backgroundDesign="Solid">
+							<headerToolbar>
+								<Toolbar>
+									<Title id="supplierCount" text="Total Suppliers" level="H2"/>
+									<ToolbarSpacer/>
+									<!--<Button tooltip="sort customers" icon="sap-icon://sort" press="sortCustomer"/>-->
+								</Toolbar>
+							</headerToolbar>
+							<columns>
+								<Column hAlign="Left">
+									<Text text="supplier ID"/>
+								</Column>
+								<Column hAlign="Left">
+									<Text text="company Name"/>
+								</Column>
+								<Column hAlign="Left">
+									<Text text="contact Name"/>
+								</Column>
+								<Column hAlign="Left">
+									<Text text="contact Title"/>
+								</Column>
+								<Column hAlign="Left">
+									<Text text="address"/>
+								</Column>
+								<Column hAlign="Left">
+									<Text text="city"/>
+								</Column>
+								<Column hAlign="Left">
+									<Text text="region"/>
+								</Column>
+								<Column hAlign="Left">
+									<Text text="postalCode"/>
+								</Column>
+								<Column hAlign="Left">
+									<Text text="country"/>
+								</Column>
+								<Column hAlign="Left">
+									<Text text="phone"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem type="Active">
+									<cells>
+										<ObjectIdentifier title="{selectedModel>SupplierID}"/>
+										<Text text="{selectedModel>CompanyName}"/>
+										<Text text="{selectedModel>ContactName}"/>
+										<Text text="{selectedModel>ContactTitle}"/>
+										<Text text="{selectedModel>Address}"/>
+										<Text text="{selectedModel>City}"/>
+										<Text text="{selectedModel>Region}"/>
+										<Text text="{selectedModel>PostalCode}"/>
+										<Text text="{selectedModel>Country}"/>
+										<Text text="{selectedModel>Phone}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+                            </Page>
+                        </NavContainer>
+                        <HBox >
+                            <Button text="Employee" press="handleNav" width="250px" type="Emphasized">
+                                <layoutData>
+                                    <FlexItemData growFactor="1"></FlexItemData>
+                                </layoutData>
+                                <customData>
+                                    <core:CustomData
+                                        key="target"
+                                        value="p1" />
+                                </customData>
+                            </Button>
+                            <Button
+                                text="Customer"
+                                press="handleNav" width="250px" type="Emphasized">
+                                <layoutData>
+                                    <FlexItemData growFactor="1" />
+                                </layoutData>
+                                <customData>
+                                    <core:CustomData
+                                        key="target"
+                                        value="p2" />
+                                </customData>
+                            </Button>
+                            <Button
+                                text="Product"
+                                press="handleNav" width="250px" type="Emphasized">
+                                <layoutData>
+                                    <FlexItemData growFactor="1" />
+                                </layoutData>
+                                <customData>
+                                    <core:CustomData
+                                        key="target"
+                                        value="p3" />
+                                </customData>
+                            </Button>
+                            <Button
+                                text="Supplier"
+                                press="handleNav" width="250px" type="Emphasized">
+                                <layoutData>
+                                    <FlexItemData growFactor="1" />
+                                </layoutData>
+                                <customData>
+                                    <core:CustomData
+                                        key="target"
+                                        value="p4" />
+                                </customData>
+                            </Button>
+                        </HBox>
+                        <HBox>
+                        <Button
+                            text="Back"
+                            type="Back"
+                            press="handleNav">
+                            <layoutData>
+                                <FlexItemData growFactor="1" />
+                            </layoutData>
+                        </Button>
+                    </HBox>
+                    </content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>
